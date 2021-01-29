@@ -7,6 +7,7 @@ public class MovimientoPersonaje : MonoBehaviour
 {
 
     public float rapidezMaxima = 5f;
+    public float rapidezRotacion = 100;
     public float rapidezActual
     {
         get
@@ -49,9 +50,9 @@ public class MovimientoPersonaje : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = velocidad;
-        if (direccion != Vector3.zero)
+        if (direccion.magnitude > 0.5f)
         {
-            rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(direccion), 0.1f);
+            rb.rotation = Quaternion.RotateTowards(rb.rotation, Quaternion.LookRotation(direccion), rapidezRotacion * Time.deltaTime);
         }
     }
 }

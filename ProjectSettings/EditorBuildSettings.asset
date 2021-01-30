@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_DEV/Daniel/Scene/Canvas Flow Scene.unity
+    path: Assets/_DEV/Daniel/Scene/Menu.unity
     guid: 0441829345789fb4cb888c543f0bdfd2
+  - enabled: 1
+    path: Assets/_DEV/Daniel/Scene/InGame.unity
+    guid: 4b07c5364fbcdce4c8e30e1056105092
   m_configObjects: {}

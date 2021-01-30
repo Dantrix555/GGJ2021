@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class MainCanvasController : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class MainCanvasController : MonoBehaviour
     private PanelBase activePanel;
     private PanelBase lastActivePanel;
 
-    public void MainCanvasSetup()
+    public void Start()
     {
         _loadingScreen.SetMainCanvasReference(this);
         _titleScreen.SetMainCanvasReference(this);
@@ -48,15 +49,15 @@ public class MainCanvasController : MonoBehaviour
 
     public void TriggerStartPanel(bool haveSavedName)
     {
-        //if (haveSavedName)
-        //{
-        //    PhotonSingleton.SetPlayerNickname(PlayerPrefs.GetString(PhotonSingleton.PlayerNamePrefsKey));
-        //    SetActiveNewPanel(_mainMenuPanelController);
-        //}
-        //else
-        //{
-        //    SetActiveNewPanel(_loginPanelController);
-        //}
+        if (haveSavedName)
+        {
+            PhotonSingleton.SetPlayerNickname(PlayerPrefs.GetString(PhotonSingleton.PlayerNamePrefsKey));
+            SetActiveNewPanel(MainMenuScreen);
+        }
+        else
+        {
+            SetActiveNewPanel(TitleScreen);
+        }
     }
 
     public void SetActiveNewPanel(PanelBase newPanel)

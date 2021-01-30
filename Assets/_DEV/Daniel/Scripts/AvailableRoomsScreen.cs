@@ -10,11 +10,7 @@ public class AvailableRoomsScreen : PanelBase
     [SerializeField] private Transform _contentTransform = default;
 
     //Load button prefabs
-    //private List<RoomInfoButton> _roomInfoList;
-    //private List<RoomInfoButton> RoomInfoList => _roomInfoList != null ? _roomInfoList : InitializeRoomInfoList();
-    //private List<RoomInfoButton> InitializeRoomInfoList() { _roomInfoList = new List<RoomInfoButton>(); return _roomInfoList; }
-
-    private int roomNumber = default;
+    private List<Button> _roomButtonsList = new List<Button>();
 
     private string roomName = default;
 
@@ -37,37 +33,33 @@ public class AvailableRoomsScreen : PanelBase
     {
         CleanItems();
 
-        //Get list of rooms
-        //List<string> roomNames = PhotonSingleton.GetRoomNames();
+        List<string> roomNames = PhotonSingleton.GetRoomNames();
 
-        //Set room names from list and set each one in a button
-        //for (int i = 0; i < roomNames.Count; i++)
-        //{
-        //    roomNumber = i;
-        //    roomName = roomNames[i];
-        //    GameObject roomButtonObject = Instantiate(_roomButtoninfo, _contentTransform.position, Quaternion.identity, _contentTransform);
-        //    RoomInfoButton roomButtonInfo = roomButtonObject.GetComponent<RoomInfoButton>();
+        for (int i = 0; i < roomNames.Count; i++)
+        {
+            roomName = roomNames[i];
+            GameObject roomButtonObject = Instantiate(_roomButtoninfo, _contentTransform.position, Quaternion.identity, _contentTransform);
+            Button roomButtonInfo = roomButtonObject.GetComponentInChildren<Button>();
 
-        //    roomButtonInfo.RoomNameText.text = roomNames[i];
-        //    roomButtonInfo.PlayersInRoomText.text = PhotonSingleton.GetPlayersInRoom(i).ToString() + " / 5";
-        //    roomButtonInfo.RoomButton.onClick.AddListener(SetRoomButtonLoad);
+            roomButtonInfo.GetComponentInChildren<Text>().text = roomNames[i];
+            roomButtonInfo.onClick.AddListener(SetRoomButtonLoad);
 
-        //    RoomInfoList.Add(roomButtonInfo);
-        //}
+            _roomButtonsList.Add(roomButtonInfo);
+        }
     }
 
     private void CleanItems()
     {
         //Clear old instances of the items
-        //if (RoomInfoList.Count == 0) { return; }
-        //foreach (RoomInfoButton roomInfo in RoomInfoList) { Destroy(roomInfo.gameObject); }
-        //RoomInfoList.Clear();
+        if (_roomButtonsList.Count == 0) { return; }
+        foreach (Button roomButtonInfo in _roomButtonsList) { Destroy(roomButtonInfo.gameObject); }
+        _roomButtonsList.Clear();
     }
 
     public void SetRoomButtonLoad()
     {
         //When clicked button load room with specific data
-        //PhotonSingleton.JoinRoom(roomName);
-        //MainCanvasReference.SetActiveNewPanel(MainCanvasReference.PlayerWaitScreen);
+        PhotonSingleton.JoinRoom(roomName);
+        MainCanvasReference.SetActiveNewPanel(MainCanvasReference.PlayerWaitScreen);
     }
 }

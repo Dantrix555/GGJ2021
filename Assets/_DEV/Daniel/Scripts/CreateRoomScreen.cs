@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class CreateRoomScreen : PanelBase
 {
@@ -11,9 +12,6 @@ public class CreateRoomScreen : PanelBase
 
     public override void OnPanelActive()
     {
-        _roomNameInputField.text = "";
-        _createRoomButton.interactable = false;
-
         _roomNameInputField.onValueChanged.AddListener(SetCreateButtonActive);
         _createRoomButton.onClick.AddListener(CreateRoom);
         _goBackButton.onClick.AddListener(GoToMainMenu);
@@ -29,17 +27,17 @@ public class CreateRoomScreen : PanelBase
         string roomName = _roomNameInputField.text;
 
         if (roomName.Length < 3) { Debug.LogError("Trying to create room with a name with length less than 3 characters"); return; }
-        
+
         //Check if room exists
-        //if (!PhotonSingleton.RoomExists(roomName))
-        //{
-        //    PhotonSingleton.CreateRoom(roomName);
-        //    MainCanvasReference.SetActiveNewPanel(MainCanvasReference.RoomInfoPanelController);
-        //}
-        //else
-        //{
-        //    Debug.LogError("A room with that name is already created");
-        //}
+        if (!PhotonSingleton.RoomExists(roomName))
+        {
+            PhotonSingleton.CreateRoom(roomName);
+            MainCanvasReference.SetActiveNewPanel(MainCanvasReference.PlayerWaitScreen);
+        }
+        else
+        {
+            Debug.LogError("A room with that name is already created");
+        }
     }
 
     public void GoToMainMenu()
@@ -49,6 +47,7 @@ public class CreateRoomScreen : PanelBase
 
     public override void OnPanelStart()
     {
-        throw new System.NotImplementedException();
+        _roomNameInputField.text = "";
+        _createRoomButton.interactable = false;
     }
 }

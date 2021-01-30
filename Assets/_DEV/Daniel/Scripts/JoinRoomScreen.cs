@@ -11,9 +11,6 @@ public class JoinRoomScreen : PanelBase
 
     public override void OnPanelActive()
     {
-        _roomCodeInputField.text = "";
-        _joinRoomButton.interactable = false;
-
         _roomCodeInputField.onValueChanged.AddListener(SetJoinButtonActive);
         _joinRoomButton.onClick.AddListener(JoinRoom);
         _goBackButton.onClick.AddListener(GoToMainMenu);
@@ -31,15 +28,15 @@ public class JoinRoomScreen : PanelBase
         if (roomName.Length < 3) { Debug.LogError("The room names have at least 3 characters"); return; }
 
         //Check if room exists
-        //if (PhotonSingleton.RoomExists(roomName))
-        //{
-        //    PhotonSingleton.JoinRoom(roomName);
-        //    MainCanvasReference.SetActiveNewPanel(MainCanvasReference.RoomInfoPanelController);
-        //}
-        //else
-        //{
-        //    Debug.LogError("Sorry the room doesn't exists");
-        //}
+        if (PhotonSingleton.RoomExists(roomName))
+        {
+            PhotonSingleton.JoinRoom(roomName);
+            MainCanvasReference.SetActiveNewPanel(MainCanvasReference.PlayerWaitScreen);
+        }
+        else
+        {
+            Debug.LogError("Sorry the room doesn't exists");
+        }
     }
 
     public void GoToMainMenu()
@@ -50,6 +47,7 @@ public class JoinRoomScreen : PanelBase
 
     public override void OnPanelStart()
     {
-        //
+        _roomCodeInputField.text = "";
+        _joinRoomButton.interactable = false;
     }
 }

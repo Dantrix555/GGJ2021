@@ -35,8 +35,7 @@ public class TitleScreen : PanelBase
 
         if (playerNickname.Length < 3) { Debug.LogError("Were trying to set names with length less than 3 characters"); return; }
 
-        //Implement photonNetwork...
-        //PhotonSingleton.SetPlayerNickname(playerNickname);
+        PhotonSingleton.SetPlayerNickname(playerNickname);
 
         MainCanvasReference.SetActiveNewPanel(MainCanvasReference.MainMenuScreen);
     }

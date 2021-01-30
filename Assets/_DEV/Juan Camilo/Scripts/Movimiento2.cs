@@ -36,7 +36,7 @@ public class Movimiento2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = velocidadFinal * rapidezMaxima;
+        rb.velocity = new Vector3(velocidadFinal.x * rapidezMaxima, rb.velocity.y, velocidadFinal.z * rapidezMaxima);
 
         if (direccion != Vector3.zero)
         {

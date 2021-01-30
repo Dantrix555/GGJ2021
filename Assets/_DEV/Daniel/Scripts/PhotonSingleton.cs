@@ -98,11 +98,11 @@ public class PhotonSingleton : BASESingleton<PhotonSingleton>
     public static List<string> GetPlayersInRoomNames()
     {
         List<string> playersNames = new List<string>();
-        foreach (Player player in PhotonNetwork.PlayerList) { playersNames.Add(player.NickName); }
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList) { playersNames.Add(player.NickName); }
         return playersNames;
     }
 
-    public static Player GetPlayerInRoom(int index)
+    public static Photon.Realtime.Player GetPlayerInRoom(int index)
     {
         return PhotonNetwork.PlayerList[index];
     }

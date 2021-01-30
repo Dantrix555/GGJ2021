@@ -332,7 +332,7 @@ namespace Photon.Pun.Simple
         #region PUN Callbacks
 
 
-        public void OnOwnerChange(Player newOwner, Player previousOwner)
+        public void OnOwnerChange(Realtime.Player newOwner, Realtime.Player previousOwner)
         {
 
 #if UNITY_EDITOR
@@ -345,7 +345,7 @@ namespace Photon.Pun.Simple
             OnChangeAuthority(photonView.IsMine, true);
         }
 
-        public void OnControllerChange(Player newController, Player previousController)
+        public void OnControllerChange(Realtime.Player newController, Realtime.Player previousController)
         {
 
 #if UNITY_EDITOR

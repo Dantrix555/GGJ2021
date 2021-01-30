@@ -27,7 +27,7 @@ public class PhotonOverrides : MonoBehaviourPunCallbacks
         //PhotonSingleton.LoadScene(PhotonSingleton.Scene.Menu);
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount >= PhotonSingleton.MaxPlayersPerRoom)
         {
@@ -35,7 +35,7 @@ public class PhotonOverrides : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         //if (RPCSingleton.Instance == null && PhotonSingleton.PlayerIsWaiting)
         //    PhotonSingleton.SetRoomVisible(true);

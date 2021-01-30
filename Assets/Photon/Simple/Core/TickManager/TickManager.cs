@@ -35,19 +35,19 @@ namespace Photon.Pun.Simple.Internal
 
         #region PUN Room Callbacks
 
-        public void OnPlayerEnteredRoom(Player newPlayer)
+        public void OnPlayerEnteredRoom(Realtime.Player newPlayer)
         {
             AddConnection(newPlayer.ActorNumber);
         }
 
-        public void OnPlayerLeftRoom(Player otherPlayer)
+        public void OnPlayerLeftRoom(Realtime.Player otherPlayer)
         {
             RemoveConnection(otherPlayer.ActorNumber);
         }
 
         public void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged) { }
-        public void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps) { }
-        public void OnMasterClientSwitched(Player newMasterClient) { }
+        public void OnPlayerPropertiesUpdate(Realtime.Player targetPlayer, Hashtable changedProps) { }
+        public void OnMasterClientSwitched(Realtime.Player newMasterClient) { }
 
         #endregion
 

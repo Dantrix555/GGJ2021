@@ -15,7 +15,7 @@ public class MainMenuScreen : PanelBase
         _joinRoomButton.onClick.AddListener(LoadJoinRoomScreen);
         _availableRoomsButton.onClick.AddListener(LoadAvailableRoomScreen);
         _titleScreenButton.onClick.AddListener(LoadTitleScreen);
-        //_exitGameButton.onClick.AddListener(ExitGame);
+        _exitGameButton.onClick.AddListener(ExitGame);
     }
 
     public void LoadCreateRoomScreen()

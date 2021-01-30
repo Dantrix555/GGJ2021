@@ -16,7 +16,7 @@ public class TitleScreen : PanelBase
 
         _nicknameImputField.onValueChanged.AddListener(SetNicknameButtonActive);
         _setNicknameButton.onClick.AddListener(SetPlayerNickname);
-        //_exitGameButton.onClick.AddListener(ExitGame);
+        _exitGameButton.onClick.AddListener(ExitGame);
     }
 
     public override void OnPanelStart()

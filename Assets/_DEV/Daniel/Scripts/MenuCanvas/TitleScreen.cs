@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +7,7 @@ public class TitleScreen : PanelBase
     [Header("Login Elements")]
     [SerializeField] private InputField _nicknameImputField = default;
     [SerializeField] private Button _setNicknameButton = default;
+    [SerializeField] private Button _exitGameButton = default;
 
     public override void OnPanelActive()
     {
@@ -17,6 +16,7 @@ public class TitleScreen : PanelBase
 
         _nicknameImputField.onValueChanged.AddListener(SetNicknameButtonActive);
         _setNicknameButton.onClick.AddListener(SetPlayerNickname);
+        //_exitGameButton.onClick.AddListener(ExitGame);
     }
 
     public override void OnPanelStart()
@@ -38,5 +38,10 @@ public class TitleScreen : PanelBase
         PhotonSingleton.SetPlayerNickname(playerNickname);
 
         MainCanvasReference.SetActiveNewPanel(MainCanvasReference.MainMenuScreen);
+    }
+
+    private void ExitGame()
+    {
+        Application.Quit();
     }
 }

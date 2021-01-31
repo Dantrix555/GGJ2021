@@ -6,6 +6,7 @@ using Photon.Pun;
 public class PhotonCollectable : PhotonInteractable
 {
     [SerializeField] private PhotonView _photonView;
+    public PhotonView PhotonView => _photonView;
 
     protected override void EventManager_OnInteraction(PhotonInteractor sender, PhotonInteractable interactable)
     {

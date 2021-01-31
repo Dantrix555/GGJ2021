@@ -5,36 +5,39 @@ using Photon.Pun;
 
 public class PhotonSpawnObjects : MonoBehaviourPun
 {
-    [SerializeField] private Transform[] spawnPoints;
-    
-    private string _folder = "Prefabs";
-    private List<GameObject> _objectsList;
+    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private GameObject[] loadedObjects;
+
+    private List<int> _randomIntList = new List<int>();
 
     //Llamar metodo usando Pun para asignar objeto a buscar
-
     private void Start()
     {
         if (PhotonSingleton.PlayerIsOwner())
-            photonView.RPC("SetObjectToCollect", RpcTarget.All);
+        {
+            //Here's OK
+            for (int j = 0; j < _spawnPoints.Length; j++)
+            {
+                int randomObjectIndex = Random.Range(0, loadedObjects.Length);
+                photonView.RPC("AddItemToList", RpcTarget.All, randomObjectIndex);
+            }
+            photonView.RPC("SpawnObjects", RpcTarget.All);
+        }
     }
 
     [PunRPC]
-    private void SetObjectToCollect()
+    private void AddItemToList(int item)
     {
-        _objectsList = new List<GameObject>();
-        GameObject[] loadedObjects = Resources.LoadAll<GameObject>(_folder);
+        _randomIntList.Add(item);
+    }
 
-        for(int i = 0; i < loadedObjects.Length; i++)
+    [PunRPC]
+    private void SpawnObjects()
+    {
+        for(int i = 0; i < _spawnPoints.Length; i++)
         {
-            _objectsList.Add(loadedObjects[i]);
-        }
-
-        for(int i = 0; i < spawnPoints.Length; i++)
-        {
-            int randomObjectIndex = Random.Range(0, _objectsList.Count);
-            GameObject instance = Instantiate(_objectsList[randomObjectIndex], spawnPoints[i].position, Quaternion.identity, transform);
-            //Save here the objects in game singleton gameobject list
-            _objectsList.RemoveAt(randomObjectIndex);
+            GameObject instance = Instantiate(loadedObjects[_randomIntList[i]], _spawnPoints[i].position, Quaternion.identity, _spawnPoints[i]);
+            instance.GetComponent<PhotonCollectable>().PhotonView.ViewID = 100 + i;
         }
     }
 }

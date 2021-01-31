@@ -6,6 +6,9 @@ public class Spawner : MonoBehaviour
     [Header("Player Prefab")]
     [SerializeField] private GameObject _playerPrefab = default;
 
+    [Space(5)]
+    [SerializeField] private PhotonSpawnObjects _objectSpawner;
+
     void Awake()
     {
         string prefabNameString = _playerPrefab.name;
@@ -20,5 +23,7 @@ public class Spawner : MonoBehaviour
         photonObejct.GetComponent<PhotonMovement>().SetNewMaterial();
         
         PhotonSingleton.SetSyncScene(false);
+
+        //_objectSpawner.SetObjects();
     }
 }

@@ -97,8 +97,13 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
+<<<<<<< HEAD
   m_LightingDataAsset: {fileID: 112000000, guid: a2e8711ca6c77aa4490493529787fbdc, type: 2}
   m_LightingSettings: {fileID: 0}
+=======
+  m_LightingDataAsset: {fileID: 112000000, guid: bd0fb236d63a754488c4c453599b6330, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: cfcacd96609f488419c2ba7ef4e7d220, type: 2}
+>>>>>>> 7d71c562c1cd19f9996f06eee0fe6a7b21367a4d
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -673,7 +678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 416712184}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 580144540}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1891,6 +1896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 6777883118820856760, guid: 78d32e73371f2de469997d2bf2a6f9b9, type: 3}
+  _objectSpawner: {fileID: 1180601785}
 --- !u!4 &868145380
 Transform:
   m_ObjectHideFlags: 0
@@ -2477,11 +2483,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f034be4d21b06ad4084f8eae83c4057f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
+  _spawnPoints:
   - {fileID: 416712184}
   - {fileID: 580144540}
   - {fileID: 2142196177}
   - {fileID: 1983108596}
+  loadedObjects:
+  - {fileID: 6170017039932049378, guid: 8915d8cbd5a1a2f4c9cb6249d490c6be, type: 3}
+  - {fileID: 6170017039932049378, guid: 17512ffa2813afe48b9bc6643340ec14, type: 3}
+  - {fileID: 6170017039932049378, guid: c11716d364ab3a845adb99e7af5d9bc5, type: 3}
+  - {fileID: 6170017039932049378, guid: 85bf2d8963c7e164a92091a4e33ad76f, type: 3}
+  - {fileID: 6170017039932049378, guid: 0e4c223e3db49cc4fb5f6fdff0de5b4f, type: 3}
+  - {fileID: 6004611157890568657, guid: 3e0cc2c93804ab44286f47e2b4cdf9d9, type: 3}
+  - {fileID: 6004611157890568657, guid: 7f4edceb675f148459bd5c52e282f733, type: 3}
+  - {fileID: 6004611157890568657, guid: 6016a561da241be409041eaa93b9b1ae, type: 3}
+  - {fileID: 6004611157890568657, guid: 7b3c2dc6ccbb29e44aea7fe4db1b9c01, type: 3}
+  - {fileID: 6004611157890568657, guid: 9cdf934a4a1f92e4a91dfa7d0cccd1e0, type: 3}
 --- !u!114 &1180601786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3603,7 +3620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1983108596}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3633,7 +3650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142196177}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}

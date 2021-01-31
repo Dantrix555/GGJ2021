@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class Collectable : Interactable
 {
-    [SerializeField] private PhotonView photonView;
+    [SerializeField] public PhotonView photonView;
     public enum Description 
     {
         Claro,

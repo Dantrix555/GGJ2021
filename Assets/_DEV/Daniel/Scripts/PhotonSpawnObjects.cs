@@ -37,7 +37,7 @@ public class PhotonSpawnObjects : MonoBehaviourPun
         for(int i = 0; i < _spawnPoints.Length; i++)
         {
             GameObject instance = Instantiate(loadedObjects[_randomIntList[i]], _spawnPoints[i].position, Quaternion.identity, _spawnPoints[i]);
-            instance.GetComponent<PhotonCollectable>().PhotonView.ViewID = 100 + i;
+            instance.GetComponent<Collectable>().photonView.ViewID = 100 + i;
         }
     }
 }

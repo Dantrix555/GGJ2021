@@ -4,12 +4,29 @@ using UnityEngine;
 
 public class Collectable : Interactable
 {
-    protected override void EventManager_OnInteraction(Interactor sender, Interactable interactable)
+    public enum Description 
     {
-        if (interactable == this)
-        {
-            Destroy(this.gameObject);
-        }
+        Claro,
+        Oscuro,
+        Duro,
+        Suave
     }
 
+    public string collectableName;
+    public List<Description> descriptions;
+
+    protected override void Initialize()
+    {
+    }
+    protected override void OnInteraction(Interactor sender, Interactable interactable)
+    {
+        Player player = (Player) sender;
+        if (player.currentCollectable != null)
+        {
+            player.DropCollectable(player.currentCollectable);
+        }
+
+        player.currentCollectable = this;
+        gameObject.SetActive(false);
+    }
 }

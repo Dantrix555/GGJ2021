@@ -57,6 +57,9 @@ public class PhotonMovement : MonoBehaviourPun
             {
                 velocidadFinal = Vector3.MoveTowards(velocidadFinal, _direccion, aceleracion * Time.deltaTime);
             }
+
+            if (Input.GetKeyDown(KeyCode.E))
+                SetActionAnimation();
         }
     }
 
@@ -84,6 +87,17 @@ public class PhotonMovement : MonoBehaviourPun
     private void SetMoveAnimation(float moveMagnitude)
     {
         _animator.SetBool("IsMoving", moveMagnitude != 0);
+    }
+
+    private void SetActionAnimation()
+    {
+        photonView.RPC("PickUp", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void PickUp()
+    {
+        _animator.SetTrigger("Action");
     }
 
     public void BlockMove()

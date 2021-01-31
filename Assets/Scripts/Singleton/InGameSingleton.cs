@@ -8,9 +8,11 @@ public class InGameSingleton : BASESingleton<InGameSingleton>
     protected InGameSingleton() { }
 
     [SerializeField] private PhotonView _photonView;
+    [SerializeField] private Animator _fadeScreenAnimator;
 
     private PhotonMovement _cachedPlayer = default;
-    
+
+
     private Vector3[] _playersPosition = default;
 
     private int _timeInSeconds = 0;
@@ -63,27 +65,27 @@ public class InGameSingleton : BASESingleton<InGameSingleton>
 
         if (_actualRound <= 5 * PhotonSingleton.GetPlayersInRoom())
         {
-            //Do fade in effect
+            _fadeScreenAnimator.SetTrigger("FadeIn");
 
             _actualRound++;
 
-            //yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f);
 
             _cachedPlayer.SetStartPosition();
 
-            //Do fade out effect
-            
+            _fadeScreenAnimator.SetTrigger("FadeOut");
+
             _cachedPlayer.UnBlockPlayer();
 
             _timeInSeconds = 10;
         }
         else
         {
-        //Set the winner
+            //Set the game winner
 
-        //yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2f);
 
-        //Do fade in effect
+            _fadeScreenAnimator.SetTrigger("FadeIn");
 
             _cachedPlayer.CameraReference.IsFollowingPlayer(false);
 

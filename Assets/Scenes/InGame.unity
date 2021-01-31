@@ -247,6 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 43315220}
   - component: {fileID: 43315221}
+  - component: {fileID: 43315222}
   m_Layer: 5
   m_Name: FadeBackground
   m_TagString: Untagged
@@ -286,6 +287,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!95 &43315222
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43315219}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 254fe5659bcb8714fb8dc7d0588d66c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &57934831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,6 +1499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _photonView: {fileID: 648893167}
+  _fadeScreenAnimator: {fileID: 43315222}
 --- !u!114 &648893169
 MonoBehaviour:
   m_ObjectHideFlags: 0

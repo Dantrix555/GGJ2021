@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InGameUIPanel : MonoBehaviour
 {
     [SerializeField] private Text _timeText = default;
-
+    
     private int _cachedRound = 0;
 
     private void Awake()

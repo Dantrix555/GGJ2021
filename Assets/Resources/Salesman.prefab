@@ -89,7 +89,7 @@ MonoBehaviour:
   aceleracion: 4
   rapidezRotacion: 300
   velocidadFinal: {x: 0, y: 0, z: 0}
-  characterRenderer: {fileID: 641353449724268744}
+  _characterRenderer: {fileID: 641353449724268744}
 --- !u!114 &2882250765496910937
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,10 +33,10 @@ public class InGameSingleton : BASESingleton<InGameSingleton>
         _playersPosition[4] = new Vector3(6f, 0.5f, 1f);
     }
 
-    private void Update()
-    {
-        Debug.LogError(_playersInGame.Count);
-    }
+    //private void Update()
+    //{
+    //    Debug.LogError(_playersInGame.Count);
+    //}
 
     public static void SetCachedPlayerController(PhotonMovement playerController)
     {
@@ -48,6 +48,8 @@ public class InGameSingleton : BASESingleton<InGameSingleton>
         Vector3 newPosition = Instance._playersPosition[_positionIndex];
         return newPosition;
     }
+
+
 
     public static void SetGameFinished()
     {

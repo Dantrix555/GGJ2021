@@ -10,7 +10,7 @@ public class PhotonMovement : MonoBehaviourPun
     public float rapidezMaxima;
     public float aceleracion;
     public float rapidezRotacion;
-    private Vector3 direccion
+    private Vector3 _direccion
     {
         get
         {
@@ -23,36 +23,37 @@ public class PhotonMovement : MonoBehaviourPun
     public Vector3 velocidadFinal;
     [Space(5)]
     [Header("Character Mesh Reference")]
-    [SerializeField] private SkinnedMeshRenderer characterRenderer;
+    [SerializeField] private SkinnedMeshRenderer _characterRenderer;
 
-    private Rigidbody rb;
-    private PhotonCamera cameraReference;
+    private Rigidbody _rb;
+    private PhotonCamera _cameraReference;
+    private string _cachedMaterialPath;
 
     private bool _canMove = true;
     public bool CanMove { get => _canMove; set => _canMove = value; }
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
 
         if(photonView.IsMine)
         {
             InGameSingleton.SetCachedPlayerController(this);
-            cameraReference = GameObject.Find("Objetivo Camara").GetComponent<PhotonCamera>();
-            cameraReference.SetPlayerTransform(transform);
+            _cameraReference = GameObject.Find("Objetivo Camara").GetComponent<PhotonCamera>();
+            _cameraReference.SetPlayerTransform(transform);
         }
     }
     private void Update()
     {
         if(photonView.IsMine && CanMove)
         {
-            if (direccion.sqrMagnitude > 1)
+            if (_direccion.sqrMagnitude > 1)
             {
-                velocidadFinal = Vector3.MoveTowards(velocidadFinal, direccion.normalized, aceleracion * Time.deltaTime);
+                velocidadFinal = Vector3.MoveTowards(velocidadFinal, _direccion.normalized, aceleracion * Time.deltaTime);
             }
             else
             {
-                velocidadFinal = Vector3.MoveTowards(velocidadFinal, direccion, aceleracion * Time.deltaTime);
+                velocidadFinal = Vector3.MoveTowards(velocidadFinal, _direccion, aceleracion * Time.deltaTime);
             }
         }
     }
@@ -61,11 +62,11 @@ public class PhotonMovement : MonoBehaviourPun
     {
         if(photonView.IsMine && CanMove)
         {
-            rb.velocity = new Vector3(velocidadFinal.x * rapidezMaxima, rb.velocity.y, velocidadFinal.z * rapidezMaxima);
+            _rb.velocity = new Vector3(velocidadFinal.x * rapidezMaxima, _rb.velocity.y, velocidadFinal.z * rapidezMaxima);
 
-            if (direccion != Vector3.zero)
+            if (_direccion != Vector3.zero)
             {
-                rb.rotation = Quaternion.RotateTowards(rb.rotation, Quaternion.LookRotation(direccion), rapidezRotacion * Time.deltaTime);
+                _rb.rotation = Quaternion.RotateTowards(_rb.rotation, Quaternion.LookRotation(_direccion), rapidezRotacion * Time.deltaTime);
             }
         }
     }
@@ -99,10 +100,12 @@ public class PhotonMovement : MonoBehaviourPun
         List<string> playerList = PhotonSingleton.GetPlayersInRoomNames();
 
         for (int i = 0; i < playerList.Count; i++)
-        {
+        {            
             if (playerList[i] == PhotonNetwork.NickName)
             {
-                //characterRenderer.material = Resources.Load("");
+                if(photonView.IsMine)
+                    _cachedMaterialPath = "SalesmanMaterials/Character_Vendedor" + i;
+
                 transform.position = InGameSingleton.NewPlayerPosition(i);
                 break;
             }
@@ -111,11 +114,22 @@ public class PhotonMovement : MonoBehaviourPun
         InGameSingleton.TimeInSeconds = 10;
     }
 
+    public void SetNewMaterial()
+    {
+        photonView.RPC("SetMaterial", RpcTarget.All, _cachedMaterialPath);
+    }
+
+    [PunRPC]
+    public void SetMaterial(string materialPath)
+    {
+        _characterRenderer.material = Resources.Load(materialPath) as Material;
+    }
+
     public void BlockPlayer()
     {
-        cameraReference.IsFollowingPlayer(false);
+        _cameraReference.IsFollowingPlayer(false);
         CanMove = false;
-        rb.velocity = Vector3.zero;
+        _rb.velocity = Vector3.zero;
     }
 
     public void LeaveGame()

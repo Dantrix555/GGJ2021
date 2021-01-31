@@ -16,7 +16,6 @@ public class Spawner : MonoBehaviour
         //Set position and player's name 
         photonObejct.GetComponent<PhotonMovement>().SetStartPosition();
 
-        //Add player in a list of players
-        //InGameSingleton.PlayersInGame.Add(photonObejct.GetComponent<PhotonMovement>());
+        photonObejct.GetComponent<PhotonMovement>().SetNewMaterial();
     }
 }

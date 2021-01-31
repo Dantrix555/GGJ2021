@@ -18,5 +18,7 @@ public class Spawner : MonoBehaviour
 
         //Set the material to player
         photonObejct.GetComponent<PhotonMovement>().SetNewMaterial();
+        
+        PhotonSingleton.SetSyncScene(false);
     }
 }

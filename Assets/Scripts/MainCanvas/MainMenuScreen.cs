@@ -38,6 +38,6 @@ public class MainMenuScreen : PanelBase
 
     public override void OnPanelStart()
     {
-        //
+        PhotonSingleton.SetSyncScene(true);
     }
 }

@@ -28,6 +28,7 @@ public class PhotonMovement : MonoBehaviourPun
 
     private Rigidbody _rb;
     private PhotonCamera _cameraReference;
+    public PhotonCamera CameraReference => _cameraReference;
     private string _cachedMaterialPath;
 
     private bool _canMove = true;
@@ -69,9 +70,9 @@ public class PhotonMovement : MonoBehaviourPun
             {
                 _rb.rotation = Quaternion.RotateTowards(_rb.rotation, Quaternion.LookRotation(_direccion), rapidezRotacion * Time.deltaTime);
             }
+            AnimateMove(_rb.velocity.magnitude);
         }
 
-        AnimateMove(_rb.velocity.magnitude);
     }
 
     private void AnimateMove(float moveMagnitude)
@@ -125,7 +126,7 @@ public class PhotonMovement : MonoBehaviourPun
             }
         }
 
-        InGameSingleton.TimeInSeconds = 50;
+        InGameSingleton.TimeInSeconds = 10;
     }
 
     public void SetNewMaterial()
@@ -144,6 +145,12 @@ public class PhotonMovement : MonoBehaviourPun
         _cameraReference.IsFollowingPlayer(false);
         CanMove = false;
         _rb.velocity = Vector3.zero;
+    }
+
+    public void UnBlockPlayer()
+    {
+        _cameraReference.IsFollowingPlayer(true);
+        CanMove = true;
     }
 
     public void LeaveGame()

@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 115f2a8282e7a9743b1f08acf5c3bf2d, type: 3}
       propertyPath: m_Name
-      value: SalesmanNew
+      value: Salesman
       objectReference: {fileID: 0}
     - target: {fileID: 5266744047579717854, guid: 115f2a8282e7a9743b1f08acf5c3bf2d, type: 3}
       propertyPath: m_Materials.Array.data[0]

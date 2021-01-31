@@ -10,8 +10,6 @@ public class LoadingScreen : PanelBase
 
     public override void OnPanelStart()
     {
-        PhotonSingleton.SetSyncScene(true);
-
         if (!PhotonSingleton.PhotonIsActive())
             PhotonSingleton.ConnectToPhoton();
 

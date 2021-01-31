@@ -13,9 +13,6 @@ public class InGameSingleton : BASESingleton<InGameSingleton>
     
     private Vector3[] _playersPosition = default;
 
-    private List<PhotonMovement> _playersInGame = new List<PhotonMovement>();
-    public static List<PhotonMovement> PlayersInGame => Instance._playersInGame;
-
     private int _timeInSeconds = 0;
     public static int TimeInSeconds { get => Instance._timeInSeconds; set => Instance._timeInSeconds = value; }
     
@@ -44,17 +41,55 @@ public class InGameSingleton : BASESingleton<InGameSingleton>
         return newPosition;
     }
 
-
-
-    public static void SetGameFinished()
+    public static void SetRoundFinished()
     {
-        Instance._photonView.RPC("StopAllPlayers", RpcTarget.All);
+        Instance._photonView.RPC("StopRound", RpcTarget.All);
     }
 
     [PunRPC]
-    private void StopAllPlayers()
+    private void StopRound()
     {
-        foreach (PhotonMovement player in _playersInGame)
-            player.BlockPlayer();
+        StartCoroutine(StopGame());
+    }
+
+    private IEnumerator StopGame()
+    {
+        Debug.LogError("Game Stopped for a while");
+
+        _cachedPlayer.BlockPlayer();
+
+        yield return new WaitForSeconds(1f);
+        
+
+        if (_actualRound <= 5 * PhotonSingleton.GetPlayersInRoom())
+        {
+            //Do fade in effect
+
+            _actualRound++;
+
+            //yield return new WaitForSeconds(1f);
+
+            _cachedPlayer.SetStartPosition();
+
+            //Do fade out effect
+            
+            _cachedPlayer.UnBlockPlayer();
+
+            _timeInSeconds = 10;
+        }
+        else
+        {
+        //Set the winner
+
+        //yield return new WaitForSeconds(2f);
+
+        //Do fade in effect
+
+            _cachedPlayer.CameraReference.IsFollowingPlayer(false);
+
+            yield return new WaitForSeconds(2f);
+
+            PhotonSingleton.LeaveRoom();
+        }
     }
 }

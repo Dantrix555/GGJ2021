@@ -118,12 +118,14 @@ public class PhotonSingleton : BASESingleton<PhotonSingleton>
 
     public static void LeaveRoom()
     {
-        //The Master client leaves the room, and there's another players in room
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1 && PhotonNetwork.IsMasterClient)
+        //The Master client left the room, and there's another players in room
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1 && PhotonNetwork.IsMasterClient && InGameSingleton.Instance == null)
         {
-            //If the owner leaves the room, the new master client is the next player in the list (MasterClient always has index 0)
+            //If the owner left the room, the new master client is the next player in the list (MasterClient always has index 0)
             PhotonNetwork.SetMasterClient(PhotonNetwork.CurrentRoom.GetPlayer(1));
         }
+
+        LoadScene(0);
 
         PhotonNetwork.LeaveRoom();
     }

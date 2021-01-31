@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PhotonMovement : MonoBehaviourPun
@@ -20,6 +21,10 @@ public class PhotonMovement : MonoBehaviourPun
         }
     }
     public Vector3 velocidadFinal;
+    [Space(5)]
+    [Header("Character Mesh Reference")]
+    [SerializeField] private SkinnedMeshRenderer characterRenderer;
+
     private Rigidbody rb;
     private PhotonCamera cameraReference;
 
@@ -97,16 +102,20 @@ public class PhotonMovement : MonoBehaviourPun
         {
             if (playerList[i] == PhotonNetwork.NickName)
             {
+                //characterRenderer.material = Resources.Load("");
                 transform.position = InGameSingleton.NewPlayerPosition(i);
                 break;
             }
         }
+
+        InGameSingleton.TimeInSeconds = 10;
     }
 
     public void BlockPlayer()
     {
         cameraReference.IsFollowingPlayer(false);
         CanMove = false;
+        rb.velocity = Vector3.zero;
     }
 
     public void LeaveGame()

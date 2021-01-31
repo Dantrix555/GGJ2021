@@ -56,12 +56,9 @@ public class InGameSingleton : BASESingleton<InGameSingleton>
 
     private IEnumerator StopGame()
     {
-        Debug.LogError("Game Stopped for a while");
-
         _cachedPlayer.BlockPlayer();
 
         yield return new WaitForSeconds(1f);
-        
 
         if (_actualRound <= 5 * PhotonSingleton.GetPlayersInRoom())
         {
@@ -77,9 +74,9 @@ public class InGameSingleton : BASESingleton<InGameSingleton>
 
             _cachedPlayer.UnBlockPlayer();
 
-            _timeInSeconds = 10;
+            _timeInSeconds -= 10;
         }
-        else
+        else if (_actualRound > 5 * PhotonSingleton.GetPlayersInRoom())
         {
             //Set the game winner
 

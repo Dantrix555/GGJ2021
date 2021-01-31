@@ -23,7 +23,6 @@ public class PhotonOverrides : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        Debug.Log("Room Left");
         if(InGameSingleton.Instance != null)
             PhotonSingleton.LoadScene(0);
     }

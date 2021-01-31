@@ -22,8 +22,9 @@ public class PhotonMovement : MonoBehaviourPun
     }
     public Vector3 velocidadFinal;
     [Space(5)]
-    [Header("Character Mesh Reference")]
+    [Header("Animation References")]
     [SerializeField] private SkinnedMeshRenderer _characterRenderer;
+    [SerializeField] private Animator _animator;
 
     private Rigidbody _rb;
     private PhotonCamera _cameraReference;
@@ -69,6 +70,19 @@ public class PhotonMovement : MonoBehaviourPun
                 _rb.rotation = Quaternion.RotateTowards(_rb.rotation, Quaternion.LookRotation(_direccion), rapidezRotacion * Time.deltaTime);
             }
         }
+
+        AnimateMove(_rb.velocity.magnitude);
+    }
+
+    private void AnimateMove(float moveMagnitude)
+    {
+        photonView.RPC("SetMoveAnimation", RpcTarget.All, moveMagnitude);
+    }
+
+    [PunRPC]
+    private void SetMoveAnimation(float moveMagnitude)
+    {
+        _animator.SetBool("IsMoving", moveMagnitude != 0);
     }
 
     public void BlockMove()
@@ -85,7 +99,7 @@ public class PhotonMovement : MonoBehaviourPun
     private IEnumerator DisableMoveTemporally()
     {
         CanMove = false;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         CanMove = true;
     }
 
@@ -111,7 +125,7 @@ public class PhotonMovement : MonoBehaviourPun
             }
         }
 
-        InGameSingleton.TimeInSeconds = 10;
+        InGameSingleton.TimeInSeconds = 50;
     }
 
     public void SetNewMaterial()

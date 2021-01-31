@@ -187,7 +187,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 289359b612a53ce4fb9e9b193c8232eb, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 9203337453357284861}
   - component: {fileID: 1351346695910464523}
   m_Layer: 5
-  m_Name: RoomButtonLayout (14)
+  m_Name: RoomButtonLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

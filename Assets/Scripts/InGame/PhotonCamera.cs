@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PhotonCamera : MonoBehaviour
 {
-    private Transform objetivo;
+    private Transform target;
     private bool isFollowingPlayer = false;
 
-    public Transform camara;
-    public float suavizado;
-    Vector3 posicionFinal;
-    Vector3 velocidad = Vector3.zero;
+    public Transform camera;
+    public float smoothLevel;
+    Vector3 finalPosition;
+    Vector3 velocity = Vector3.zero;
 
     public void SetPlayerTransform(Transform newPlayerTransform)
     {
-        objetivo = newPlayerTransform;
+        target = newPlayerTransform;
         IsFollowingPlayer(true);
     }
 
@@ -25,21 +23,21 @@ public class PhotonCamera : MonoBehaviour
 
     private void Awake()
     {
-        camara = transform.GetChild(0);
+        camera = transform.GetChild(0);
     }
 
     private void Update()
     {
         if(isFollowingPlayer)
-            posicionFinal = Vector3.SmoothDamp(transform.position, objetivo.position, ref velocidad, suavizado);
+            finalPosition = Vector3.SmoothDamp(transform.position, target.position, ref velocity, smoothLevel);
     }
 
     private void LateUpdate()
     {
         if(isFollowingPlayer)
         {
-            transform.position = posicionFinal;
-            camara.LookAt(objetivo);
+            transform.position = finalPosition;
+            camera.LookAt(target);
         }
     }
 }

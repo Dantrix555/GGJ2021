@@ -7,7 +7,6 @@ public abstract class Interactable : MonoBehaviour
     private void Awake()
     {
         EventManager.OnInteraction += EventManager_OnInteraction;
-        Initialize();
     }
 
     private void EventManager_OnInteraction(Interactor sender, Interactable interactable)
@@ -17,7 +16,5 @@ public abstract class Interactable : MonoBehaviour
             OnInteraction(sender, interactable);
         }
     }
-
-    protected abstract void Initialize();
     protected abstract void OnInteraction(Interactor sender, Interactable interactable);
 }

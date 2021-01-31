@@ -11,4 +11,12 @@ public class EventManager
     {
         OnInteraction?.Invoke(sender, interactable);
     }
+
+    public delegate void HitPlayer(Player player);
+    public static event HitPlayer OnHitPlayer;
+
+    public static void HitPlayerEvent(Player player)
+    {
+        OnHitPlayer?.Invoke(player);
+    }
 }

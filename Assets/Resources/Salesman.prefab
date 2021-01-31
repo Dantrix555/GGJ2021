@@ -146,7 +146,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &3189834315658645045
+--- !u!114 &2808719467115929846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6777883118820856760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403f6228f3280304ea5394f402401e2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c2b546c19c277845bb4eb59cbb637a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   detectionLayer:
@@ -163,6 +163,14 @@ MonoBehaviour:
     m_Bits: 8
   detectionRadius: 1
   nearestInteractable: {fileID: 0}
+  name: 
+  score: 0
+  currentCollectable: {fileID: 0}
+  hand: {fileID: 0}
+  damageRange: 0
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &4925205039076936330
 MonoBehaviour:
   m_ObjectHideFlags: 0
